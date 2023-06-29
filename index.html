@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Formulario de contacto</title>
+    <link rel="icon" type="image/jpg" href="images/favicon.png"></link>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+
+
+
+
+    <style>
+        /* Estilos para el contenedor principal */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Estilos para el contenedor secundario */
+        .sub-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+
+        }
+
+        /* Estilos para las columnas dentro del contenedor secundario */
+        .sub-container .column {
+            flex-basis: 50%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 5px solid #ffffff21;
+
+        }
+
+        /* Estilos adicionales para pantallas pequeñas */
+        @media screen and (max-width: 700px) {
+            .column {
+                flex-basis: 100%;
+            }
+
+            .resultado {
+                position: absolute;
+                margin-right: 900px;
+                margin-top: 2%;
+
+            }
+
+        }
+
+        @media (min-width: 768px) and (max-width: 800px) {
+            #resultado {
+                position: absolute;
+                margin-right: 280px;
+                margin-top: 2%;
+
+            }
+
+        }
+
+        @media(max-width: 600px) {
+            #resultado {
+                display: none;
+
+            }
+
+            .flex-column {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+
+        .column {
+            flex-basis: 50%;
+            padding: 10px;
+
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: flex-start;
+        }
+
+        .resultado {
+            font-size: 14px;
+            margin-left: 200px;
+            padding-top: 15px;
+            width: 150%;
+
+        }
+
+        .qrcode {
+            background-image: url(/images/placeholder.svg);
+            background-size: 1px;
+            background-repeat: no-repeat;
+            justify-content: start;
+            display: block;
+            padding: 10px;
+            height: 200px;
+            width: 200px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Formulario vCard</h1>
+
+
+        <div class="sub-container">
+
+            <div id="resultados" class="resultados" style="">
+            </div>
+            <div class="column container-imprimir" id="container-imprimi">
+               
+                <div>
+                    <div class="qrcode">
+                        <div id="qrcode">
+                        </div>
+                        <div id="resultado" class="resultado" style="margin-top: -200px;">
+                        </div>
+
+                        <section>
+                    </div>
+                    <div style="margin-top: 10%;">
+
+
+                        <div>
+
+                            <div>
+                                <img style="height: 60px; margin-left: 250px; margin-top: -120px;"
+                                    id="imagen-seleccionada" class="imagenAtek" src="" alt="" />
+                            </div>
+                            <div>
+                                <p style="font-size: 12px; margin-top: -20px;">
+
+                                   <strong> CONFIDENCIAL.</strong> Con la ley 1266 de 2008 y la ley 1581 de 2012, de Habeas Data,
+                                    estamos en la obligación de informarte que estás en nuestra base de datos.
+                                    La información contenida en este e-mail es confidencial y sólo puede ser
+                                    utilizada por el individuo o la compañía a la cual está dirigido. Si no es
+                                    usted el destinatario autorizado, cualquier retención, difusión,
+                                    distribución o copia de este mensaje está prohibida y es sancionada por la
+                                    ley. Si usted ha recibido este correo electrónico por error, por favor
+                                    avísenos inmediatamente por esta vía y proceda con el borrado inmediato y
+                                    sus archivos anexos. Las opiniones expresadas en este correo son
+                                    responsabilidad única de su autor y no comprometen ni necesariamente
+                                    representan la opinión o punto de vista de la empresa. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="column">
+                <div>
+                    <div class="row no-gutters">
+                        <div class="col-lg-12 col-md-12 order-md-last d-flex align-items-stretch">
+                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                <h3 class="mb-4">¡Bienvenido!</h3>
+                                <div id="form-message-warning" class="mb-4"></div>
+                                <div id="form-message-success" class="mb-4">
+                                    Su mensaje fue enviado, gracias!
+                                </div>
+                                <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label class="form-list__row" for="subject">Cargo</label>
+                                                <input type="text" class="form-control" name="subject" id="subject"
+                                                    placeholder="Cargo a desempeñar">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="name">Nombres</label>
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Nombres completos">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label" for="name">Numero de telefono</label>
+                                                <input type="tel" class="form-control" name="tel" id="tel"
+                                                    pattern="[0-9]+" placeholder="Número de contacto">
+
+                                            </div>
+                                            <a>
+                                                <select id="secciones" onchange="cambiarImagen()" class="custom-select"
+                                                    n name="lenguajes" id="lang">
+                                                    <option class=" selected" value="">Seleccionar empresa</option>
+                                                    <option value="images/Logo Atek MS365.png" class="select-option">
+                                                        Atek Group
+                                                    </option>
+                                                    <option value="images/digital.png" class="select-option">Digital
+                                                        Procces
+                                                    </option>
+                                                    <option value="images/metatelco.png" style="width: 100px;"
+                                                        class="select-option-imagen">Meta Telco
+                                                    </option>
+                                                    <option value="images/vial.png" class="select-option-imagen">Vial
+                                                        Solutions
+                                                    </option>
+                                                    <option value="images/dartelecom.png" class="select-option">
+                                                        DarTelecom</option>
+                                                </select>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="email">Email </label>
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                    placeholder="Ingresa tu correo electronico">
+                                            </div>
+
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label"  for="#">Sitio web</label>
+                                                    <input name="message" class="form-control" id="message" cols="30"
+                                                        rows="4" pattern="[www]+" placeholder="www.mi-Sitio-web.com/">
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                </form>
+
+                            </div>
+                            <div style="padding-top: 50px;"
+                                class=" d-flex flex-md-row flex-column justify-content-around">
+                                <div class="form-group mb-md-0 mb-2">
+                                    <input type="submit" value="Descargar" id="btnDownload" class="btn btn-warning"
+                                        onclick="printContent()">
+                                    <div class="submitting"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Generar Qr" class="btn btn-primary center-block"
+                                        onclick="generateqr()">
+                                    <div class="submitting"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="text pl-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+    </div>
+
+    </div>
+    </div>
+    </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+<script>
+   function generateqr() {
+  var name = document.getElementById('name').value;
+  var telefono = document.getElementById('tel').value;
+  var email = document.getElementById('email').value;
+  var cargo = document.getElementById('subject').value;
+  var sitio = document.getElementById('message').value;
+  const selectElement = document.getElementById("secciones");
+
+  // Validar que se haya seleccionado una imagen del select
+  if (selectElement.value === "") {
+    alert("Por favor, seleccione una imagen antes de generar el QR.");
+    return;
+  }
+
+  console.log('Nombres: ' + name + " " + email + " " + cargo + " " + sitio);
+
+  var vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${name} 
+ORG:${cargo}
+TEL:${telefono}
+EMAIL:${email}
+URL:${sitio}
+END:VCARD`;
+
+  var encodedData = encodeURIComponent(vCardData);
+  var url = "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" + encodedData + "&allowTain";
+  console.log('URL', url);
+
+  var img = document.createElement('img');
+  img.src = url;
+  img.style.border = 'none';
+  img.style.borderRadius = '20px';
+
+  var qrcodeDiv = document.getElementById('qrcode');
+  qrcodeDiv.innerHTML = '';
+  qrcodeDiv.style.backgroundColor = 'transparent';
+  qrcodeDiv.style.border = 'none';
+  qrcodeDiv.appendChild(img);
+
+  mostrarResultado();
+
+  qrGenerated = true; // Actualizar la variable de estado para indicar que el QR ha sido generado
+}
+
+
+
+function mostrarResultado() {
+  console.log("lkgfnheghphjdphjgdph")
+  const cargo = document.getElementById('subject').value;
+  const name = document.getElementById('name').value;
+  const telefono = document.getElementById('tel').value;
+  const email = document.getElementById('email').value;
+  const sitio = document.getElementById('message').value;
+
+  const resultadoDiv = document.getElementById('resultado');
+  resultadoDiv.innerHTML = `
+  <div style="text-align: right;">
+      <span style="color: blue; font-weight: bold">${name.toUpperCase()}</span> <br>
+      ${cargo} <br>
+      movil: ${telefono}<br>  
+      ${email} <br>
+      ${sitio}<br>
+    </div>
+  `;
+}
+
+
+
+    
+    function cambiarImagen() {
+        const selectElement = document.getElementById("secciones");
+        const imagenSeleccionada = document.getElementById("imagen-seleccionada");
+        const urlImagen = selectElement.value;
+        imagenSeleccionada.src = urlImagen;
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        var seccionesSelect = document.getElementById('secciones');
+        seccionesSelect.value = '';
+    });
+ 
+
+   
+    // function printContent() {
+    //     var content = document.querySelector('.blog');
+    //     domtoimage.toBlob(content)
+    //         .then(function (blob) {
+    //             var link = document.createElement('a');
+    //             link.download = 'vrcard.png';
+    //             link.href = URL.createObjectURL(blob);
+    //             link.click();
+    //         });
+    // }
+
+    function printContent() {
+  var content = document.querySelector('.container-imprimir');
+
+
+  content.style.backgroundColor = '#ffffff'; // Establecer fondo blanco
+  if (!content) {
+    alert('El elemento no existe o no se ha cargado correctamente.')
+    console.error('El elemento no existe o no se ha cargado correctamente.');
+    return;
+  }
+
+  var options = {
+    useCORS: true,
+  };
+
+  domtoimage.toBlob(content, options)
+    .then(function (blob) {
+      var link = document.createElement('a');
+      link.download = 'vrcard.png';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    })
+    .catch(function (error) {
+      console.error('Error al capturar la imagen:', error);
+    });
+}
+
+</script>
+
+</body>
+
+</html>
